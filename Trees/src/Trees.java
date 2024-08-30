@@ -14,6 +14,7 @@ class Node {
 
 }
 
+
 class BinaryTree{
     int index = -1;
 
@@ -91,6 +92,21 @@ class BinaryTree{
 
     }
 
+    void levelorder2(Node root){
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()){
+            Node present = queue.remove();
+            System.out.print(present.data +" ");
+            if(present.left!=null){
+                queue.add(present.left);
+            }
+            if(present.right!=null){
+                queue.add(present.right);
+            }
+        }
+    }
+
     int countOfNodes(Node root){
         if(root == null){
             return 0;
@@ -121,6 +137,19 @@ class BinaryTree{
         return Math.max(leftheight,rightheight)+1;
 
     }
+
+    int diameterOfTree(Node root){
+        if(root == null){
+            return 0;
+        }
+        int leftdiameter = heightOfTree(root.left);
+        int rightdiameter = heightOfTree(root.right);
+        int diameter3 = leftdiameter+rightdiameter+1;
+
+        return Math.max(leftdiameter,Math.max(rightdiameter,diameter3));
+
+    }
+
 
 }
 public class Trees {
@@ -158,5 +187,9 @@ public class Trees {
         System.out.println(height);
 
 
+        int diameter = tree.diameterOfTree(node);
+        System.out.println(diameter);
+
+        tree.levelorder2(node);
     }
 }
